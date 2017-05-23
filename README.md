@@ -1,6 +1,7 @@
 # babel-plugin-transform-extract-badgee-logs
 
-I'll think about it later
+A [Babel](https://babeljs.io/) plugin to extract string from [badgee](https://github.com/dharFr/badgee) log calls and save them into an array.
+_*This is still a work in progress, not suitable for production*_.
 
 ## Example
 
@@ -8,14 +9,30 @@ I'll think about it later
 
 ```js
 // input code
+import badgee from 'badgee';
+
+badgee.log('Define logger');
+const logger = badgee.get('logger');
+
+function foo() {
+  logger.log("logging to logger");
+  blah();
+}
 ```
 
 **Out**
 
 ```js
-"use strict";
-
 // output code
+import badgee from 'badgee';
+
+badgee.log(___badgee[0]);
+const logger = badgee.get('logger');
+
+function foo() {
+  logger.log(___badgee[1]);
+  blah();
+}
 ```
 
 ## Installation
